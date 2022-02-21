@@ -60,3 +60,17 @@ Until a booking is confirmed, it will remain available
 ## MVP
 
 Listing a space, being able to see all spaces, book an avaliable space.
+
+## Databases
+- makersbnb
+- makersbnb_test
+
+| ID | Title(60) |
+| -- | -------- |
+| 1  | Space A  |
+| 2  | Space B  |
+
+## To set up
+
+- Make two databases, listed above
+- For each, run the commands in /db/migrations
