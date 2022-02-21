@@ -10,5 +10,17 @@ class MakersBnB < Sinatra::Base
     'Hello World'
   end
 
+  get '/spaces' do
+    'List of spaces'
+  end
+
+  get '/spaces/new' do
+    erb :'spaces/new'
+  end
+
+  post '/spaces' do
+    redirect '/spaces'
+  end
+
   run! if app_file == $0
 end
