@@ -8,8 +8,15 @@ describe Space do
       conn.exec("INSERT INTO spaces (title) VALUES ('Space A');")
       conn.exec("INSERT INTO spaces (title) VALUES ('Space B');")
       spaces = Space.all
-      expect(spaces).to include 'Space A'
-      expect(spaces).to include 'Space B'
+      expect(spaces[0].title).to eq 'Space A'
+      expect(spaces[1].title).to eq 'Space B'
+    end
+  end
+
+  describe '#initialize' do
+    it 'should return instance of a class' do
+      space = Space.new(title: 'Space A')
+      expect(space.title).to eq 'Space A'
     end
   end
 end

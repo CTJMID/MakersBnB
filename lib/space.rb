@@ -1,14 +1,28 @@
 require 'pg'
 
 class Space
+
+  attr_reader :title
+
+  def initialize(title:)
+    @title = title
+  end
+
   def self.all
+    conn = self.connection
+    result = conn.exec('SELECT * FROM spaces')
+    result.map do |space|
+      Space.new(title: space['title'])
+    end
+  end
+
+  private 
+
+  def self.connection
     if ENV['ENVIRONMENT'] == 'test'
       conn = PG.connect(dbname: 'makersbnb_test')
     elsif conn = PG.connect(dbname: 'makersbnb')
     end
-    result = conn.exec('SELECT * FROM spaces')
-    result.map do |space|
-      space['title']
-    end
   end
+
 end
