@@ -3,8 +3,13 @@ require 'space'
 describe Space do
   describe '#create' do
     it 'creates a new listing for a space' do
-      conn = PG.connect(dbname: 'makersbnb_test')
-
+      
+      if ENV['RACK_ENV'] == 'test'
+        conn = PG.connect(dbname: 'makersbnb_test')
+      else
+        conn = PG.connect(dbname: 'makersbnb')
+      end
+      
       conn.exec("INSERT INTO spaces (title) VALUES ('Test listing')")
 
       result = conn.exec('SELECT * FROM spaces')
