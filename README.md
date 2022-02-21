@@ -56,3 +56,7 @@ So that I have fair dibs on booking a space
 Until a booking is confirmed, it will remain available
 
 ```
+
+## MVP
+
+Listing a space, being able to see all spaces, book an avaliable space.
