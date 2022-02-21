@@ -7,7 +7,8 @@ feature "list a space" do
 
     # This will be the test when the 'see all spaces' feature is complete
     # expect(page).to have_content 'Nice bedroom'
-    
+
     expect(page.status_code).to be(200)
+    expect(page).to have_content 'List of spaces'
   end
 end
