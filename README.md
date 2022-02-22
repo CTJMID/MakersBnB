@@ -1,13 +1,14 @@
 # MakersBnB
 
-## High Level Porjkect Specification
-We are building a clone of AirBnB, where users, can log-in to do:
-- can list rooms
-- hire/books rooms
+## High Level Project Specification
+We are building a clone of AirBnB, where users, can log-in to:
+- list rooms
+- hire/book rooms
 
 ## User Stories
 
-```As a user 
+```
+As a user 
 So that I can rent-out my spareroom 
 I would like to list a new space 
 
@@ -49,7 +50,7 @@ I can approve customer requests
 
 As a user
 So that I never book an occupied space
-Once the space is booked,the dates are unavailable
+Once the space is booked, the dates are unavailable
 
 As a user
 So that I have fair dibs on booking a space
@@ -59,13 +60,15 @@ Until a booking is confirmed, it will remain available
 
 ## MVP
 
-Listing a space, being able to see all spaces, book an avaliable space.
+- Listing a space.
+- Being able to see all spaces.
+- Book an avaliable space.
 
 ## Databases
-- makersbnb
-- makersbnb_test
+- `makersbnb`
+- `makersbnb_test`
 
-| ID | Title(60) |
+| ID | Title (60) |
 | -- | -------- |
 | 1  | Space A  |
 | 2  | Space B  |
@@ -73,4 +76,4 @@ Listing a space, being able to see all spaces, book an avaliable space.
 ## To set up
 
 - Make two databases, listed above
-- For each, run the commands in /db/migrations
+- For each, run the commands in `/db/migrations`
