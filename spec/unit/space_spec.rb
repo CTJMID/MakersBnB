@@ -32,4 +32,17 @@ describe Space do
       expect(space.title).to eq 'Space A'
     end
   end
+
+  describe '.book' do
+    it 'should update a space to be booked' do
+      conn = PG.connect(dbname: 'makersbnb_test')
+      conn.exec("INSERT INTO spaces (title) VALUES ('Space A');")
+      conn.exec("UPDATE spaces SET available = FALSE WHERE title='Space A';")
+      result = conn.exec('SELECT * FROM spaces')
+      spaces = result.map { |space| space['available'] }
+
+      expect(spaces).to include ('f')
+    end
+  end
+
 end
