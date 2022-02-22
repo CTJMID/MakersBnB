@@ -45,11 +45,9 @@ describe Space do
       id = space.id
       Space.book(id)
 
-      conn = PG.connect(dbname: 'makersbnb_test')
-      result = conn.exec('SELECT * FROM spaces')
-      spaces = result.map { |space| space['available'] }
+      spaces = Space.all
 
-      expect(spaces).to include 'f'
+      expect(spaces.first.available).to be false
     end
   end
 end
