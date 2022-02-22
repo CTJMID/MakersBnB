@@ -28,21 +28,30 @@ describe Space do
 
   describe '#initialize' do
     it 'should return instance of a class' do
-      space = Space.new(title: 'Space A')
+      space = Space.new(id: 1, title: 'Space A', available: true)
       expect(space.title).to eq 'Space A'
     end
   end
 
   describe '.book' do
-    it 'should update a space to be booked' do
-      conn = PG.connect(dbname: 'makersbnb_test')
-      conn.exec("INSERT INTO spaces (title) VALUES ('Space A');")
-      conn.exec("UPDATE spaces SET available = FALSE WHERE title='Space A';")
-      result = conn.exec('SELECT * FROM spaces')
-      spaces = result.map { |space| space['available'] }
-
-      expect(spaces).to include ('f')
+    it 'should default to be available by returning true' do
+      space = Space.create('Space A')
+      
+      expect(space.available).to be true
+    end
+    
+    it 'should update availiblity to false' do
+      space = Space.create('Space A')
+      space.book
+     
+      expect(spaces.available).to be false
     end
   end
-
 end
+
+
+# conn = PG.connect(dbname: 'makersbnb_test')
+#       conn.exec("INSERT INTO spaces (title) VALUES ('Space A');")
+#       conn.exec("UPDATE spaces SET available = FALSE WHERE title='Space A';")
+#       result = conn.exec('SELECT * FROM spaces')
+#       spaces = result.map { |space| space['available'] }
