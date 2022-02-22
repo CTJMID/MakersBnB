@@ -5,10 +5,7 @@ feature "list a space" do
     fill_in('title', with: 'Nice bedroom')
     click_button('Submit')
 
-    # This will be the test when the 'see all spaces' feature is complete
-    # expect(page).to have_content 'Nice bedroom'
-
     expect(page.status_code).to be(200)
-    expect(page).to have_content 'List of spaces'
+    expect(page).to have_content 'Nice bedroom'
   end
 end

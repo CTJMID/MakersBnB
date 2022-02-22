@@ -16,7 +16,6 @@ require './spec/setup_database.rb'
 Capybara.app = MakersBnB
 
 RSpec.configure do |config|
-
   config.before(:each) do
     load "./spec/setup_database.rb"
   end
@@ -28,6 +27,6 @@ RSpec.configure do |config|
   config.mock_with :rspec do |mocks|
     mocks.verify_partial_doubles = true
   end
-  
+
   config.shared_context_metadata_behavior = :apply_to_host_groups
 end
