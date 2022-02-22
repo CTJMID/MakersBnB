@@ -1,0 +1,21 @@
+<html>
+
+<head>
+</head>
+
+<body>
+
+<form action='/signup' method=POST>
+  <input type='email' name='email' placeholder='Please enter your email' required>
+  <input type='password' name='password' placeholder='Please enter your password' required>
+  <button type='submit' name='Sign up'>Sign up</button>
+</form>
+
+<% if @user.nil? %>
+    <% else %>
+    <p><%= @user.email %> has been registered.</p>
+    <% end %>
+
+</body>
+
+</html>
