@@ -29,6 +29,10 @@
       </form>
       <br>
       <% if @user.nil? %>
+      <% elsif @user == false %>
+      <div class="alert alert-danger" role="alert">
+        ERROR: This email has already been registered.
+      </div>
       <% else %>
       <div class="alert alert-success" role="alert">
         <%= @user.email %> has been registered.

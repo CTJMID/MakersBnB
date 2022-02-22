@@ -34,7 +34,12 @@ class MakersBnB < Sinatra::Base
   end
 
   post '/signup' do
-    session[:user] = User.create(email: params['email'], password: params['password'])
+    if User.unique?(email: params['email'])
+      session[:user] = User.create(email: params['email'], password: params['password'])
+    else
+      session[:user] = false
+    end
+  
     redirect '/signup'
   end
 
