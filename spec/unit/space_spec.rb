@@ -44,7 +44,6 @@ describe Space do
       space = Space.create('Space A')
       id = space.id
       Space.book(id)
-
       spaces = Space.all
 
       expect(spaces.first.available).to be false
