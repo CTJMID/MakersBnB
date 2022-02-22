@@ -1,5 +1,4 @@
 require 'space'
-require 'pg'
 
 describe Space do
   describe '.all' do
