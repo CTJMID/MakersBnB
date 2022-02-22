@@ -1,9 +1,52 @@
 # MakersBnB
 
-## High Level Project Specification
-We are building a clone of AirBnB, where users, can log-in to:
-- list rooms
-- hire/book rooms
+A clone of AirBnB. Registered users can:
+- Log in and out.
+- List rooms.
+- Hire / book rooms.
+
+## Databases
+- `makersbnb`
+- `makersbnb_test`
+
+### "Spaces" table
+
+| ID | Title (60) |
+| -- | -------- |
+| 1  | Space A  |
+| 2  | Space B  |
+
+### "Users" table
+
+| ID | email (120) UNIQUE | password (120) |
+| -- | -------- | --- |
+| 1  | test@test.com  | pwd123 |
+| 2  | tost@tost.com  | wpd231 |
+
+## To set up
+
+- Clone the repository and `cd` into the directory.
+- Run `bundle` to install dependencies.
+- [Create the two databases with PostgreSQL](https://www.postgresql.org/docs/9.0/sql-createdatabase.html)
+- For each, run the queries in `/db/migrations` to create the tables.
+- From the `makersbnb` directory, launch `rackup`.
+- From your browser, visit `localhost:portnumber`, where `portnumber` is shown in terminal by `rackup`.
+- Enjoy!
+
+## MVP
+
+- [x] Listing a space.
+- [x] Being able to see all spaces.
+- [x] Book an avaliable space.
+
+## Extra features
+- [x] User registration (with unique email address).
+- [] Log in and log out.
+- [] Description and price per listing.
+- [] Date range per listing.
+- [] Multiple listings per user.
+- [] Some style, fonts, logo.
+- [] ... and more!
 
 ## User Stories
 
@@ -55,25 +98,4 @@ Once the space is booked, the dates are unavailable
 As a user
 So that I have fair dibs on booking a space
 Until a booking is confirmed, it will remain available
-
 ```
-
-## MVP
-
-- Listing a space.
-- Being able to see all spaces.
-- Book an avaliable space.
-
-## Databases
-- `makersbnb`
-- `makersbnb_test`
-
-| ID | Title (60) |
-| -- | -------- |
-| 1  | Space A  |
-| 2  | Space B  |
-
-## To set up
-
-- Make two databases, listed above
-- For each, run the commands in `/db/migrations`
