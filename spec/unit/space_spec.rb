@@ -44,14 +44,9 @@ describe Space do
       space = Space.create('Space A')
       space.book
      
-      expect(spaces.available).to be false
+      expect(space.available).to be false
     end
   end
 end
 
 
-# conn = PG.connect(dbname: 'makersbnb_test')
-#       conn.exec("INSERT INTO spaces (title) VALUES ('Space A');")
-#       conn.exec("UPDATE spaces SET available = FALSE WHERE title='Space A';")
-#       result = conn.exec('SELECT * FROM spaces')
-#       spaces = result.map { |space| space['available'] }
