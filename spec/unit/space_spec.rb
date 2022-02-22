@@ -42,9 +42,14 @@ describe Space do
     
     it 'should update availiblity to false' do
       space = Space.create('Space A')
-      space.book
-     
-      expect(space.available).to be false
+      id = space.id
+      Space.book(id)
+
+      conn = PG.connect(dbname: 'makersbnb_test')
+      result = conn.exec('SELECT * FROM spaces')
+      spaces = result.map { |space| space['available'] }
+
+      expect(spaces).to include 'f'
     end
   end
 end
