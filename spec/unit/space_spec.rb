@@ -28,8 +28,27 @@ describe Space do
 
   describe '#initialize' do
     it 'should return instance of a class' do
-      space = Space.new(title: 'Space A')
+      space = Space.new(id: 1, title: 'Space A', available: true)
       expect(space.title).to eq 'Space A'
     end
   end
+
+  describe '.book' do
+    it 'should default to be available by returning true' do
+      space = Space.create('Space A')
+      
+      expect(space.available).to be true
+    end
+    
+    it 'should update availiblity to false' do
+      space = Space.create('Space A')
+      id = space.id
+      Space.book(id)
+      spaces = Space.all
+
+      expect(spaces.first.available).to be false
+    end
+  end
 end
+
+
