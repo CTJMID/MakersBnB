@@ -41,12 +41,12 @@ A clone of AirBnB. Registered users can:
 
 ## Extra features
 - [x] User registration (with unique email address).
-- [] Log in and log out.
-- [] Description and price per listing.
-- [] Date range per listing.
-- [] Multiple listings per user.
-- [] Some style, fonts, logo.
-- [] ... and more!
+- [ ] Log in and log out.
+- [ ] Description and price per listing.
+- [ ] Date range per listing.
+- [ ] Multiple listings per user.
+- [ ] Some style, fonts, logo.
+- [ ] ... and more!
 
 ## User Stories
 
