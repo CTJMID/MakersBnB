@@ -1,4 +1,3 @@
-require 'pg'
 require_relative './conn'
 
 class Space
@@ -24,10 +23,21 @@ class Space
   end
 
   def self.create(title, description, price)
-    # if price >= 1000 then fail with error message
     result = Conn.query("INSERT INTO spaces (title, description, price) VALUES ('#{title}', '#{description}', '#{price}') RETURNING id, title, available, description, price;")
     Space.new(id: result[0]['id'], title: result[0]['title'], available: result[0]['available'], description: result[0]['description'], price: (result[0]['price']).to_f)
   end
+  
+  # def self.selection(start_date, end_date)
+  #   all_available = []
+  #   ids = Booking.not_available(start_date, end_date)
+  #   ids.each { |id|
+  #     result = Conn.query(
+  #       "SELECT * FROM spaces
+  #       WHERE ID NOT #{id};"
+  #     )
+  #     all_available << result
+  #   }
+  # end
 
   def self.book(id)
     Conn.query("UPDATE spaces SET available = FALSE WHERE id=' #{id} ';")
