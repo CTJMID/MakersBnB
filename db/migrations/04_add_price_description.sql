@@ -1,1 +1,2 @@
 ALTER TABLE spaces ADD COLUMN description VARCHAR(300);
+ALTER TABLE spaces ADD COLUMN price NUMERIC (5,2);

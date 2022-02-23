@@ -1,10 +1,10 @@
 require 'pg'
-require 'conn'
+require_relative './conn'
 
 class Space
-  attr_reader :id, :title, :available, :description
+  attr_reader :id, :title, :available, :description, :price
 
-  def initialize(id:, title:, available:, description:)
+  def initialize(id:, title:, available:, description:, price:)
     @id = id
     @title = title
       if available == 't'
@@ -13,18 +13,19 @@ class Space
         @available = false
       end
     @description = description
+    @price = price
   end
 
   def self.all
     result = Conn.query('SELECT * FROM spaces')
     result.map do |space|
-      Space.new(id: space['id'], title: space['title'], available: space['available'], description: space['description'])
+      Space.new(id: space['id'], title: space['title'], available: space['available'], description: space['description'], price: space['price'])
     end
   end
 
-  def self.create(title, description)
-    result = Conn.query("INSERT INTO spaces (title, description) VALUES ('#{title}', '#{description}') RETURNING id, title, available, description;")
-    Space.new(id: result[0]['id'], title: result[0]['title'], available: result[0]['available'], description: result[0]['description'])
+  def self.create(title, description, price)
+  result = Conn.query("INSERT INTO spaces (title, description, price) VALUES ('#{title}', '#{description}', '#{price}') RETURNING id, title, available, description, price;")
+    Space.new(id: result[0]['id'], title: result[0]['title'], available: result[0]['available'], description: result[0]['description'], price: result[0]['price'])
   end
 
   def self.book(id)

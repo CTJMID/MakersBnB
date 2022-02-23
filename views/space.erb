@@ -19,7 +19,7 @@
                         <h5 class='card-title'><%= space.title %></h5>
                         <p class='card-text'><%= space.description %></p>
                     </div>
-
+                    '£50 per night'
                     <% if space.available == true %>
                         <form action="/book" method='post'>
                             <input type="hidden" name="id" value="<%= space.id %>"> 
