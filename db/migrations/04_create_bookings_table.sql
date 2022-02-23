@@ -1,0 +1,1 @@
+CREATE TABLE bookings (id SERIAL PRIMARY KEY, start_date DATE, end_date DATE, spaces_id INT, FOREIGN KEY (spaces_id) REFERENCES spaces(id) );
