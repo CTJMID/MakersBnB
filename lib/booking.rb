@@ -1,4 +1,4 @@
-require 'conn'
+require_relative './conn'
 
 class Booking
 
@@ -24,6 +24,19 @@ class Booking
       true
     else
       false
+    end
+  end
+
+  def self.not_available(start_date, end_date)
+    result = Conn.query(
+      "SELECT * FROM bookings
+      WHERE (DATE('#{start_date}') >= start_date AND DATE('#{start_date}') < end_date)
+      OR (DATE('#{end_date}') > start_date AND DATE('#{end_date}') <= end_date)
+      OR (DATE('#{start_date}') <= start_date AND DATE('#{end_date}') >= end_date) ;"
+    )
+
+    result.map do |spaces| 
+      spaces['spaces_id']
     end
   end
 

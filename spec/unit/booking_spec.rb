@@ -40,4 +40,16 @@ describe Booking do
       expect(Booking.available?('2022-02-20', '2022-02-27', space.id)).to be false
     end
   end
+
+  describe 'self.all_available' do
+    it 'should return all current available spaces' do
+      space_a = Space.create('Space A')
+      Booking.create('2022-02-23', '2022-02-25', space_a.id)
+      space_b = Space.create('Space B')
+      Booking.create('2022-02-26', '2022-02-28', space_b.id)
+
+      expect(Booking.not_available('2022-02-21', '2022-02-28')).to include space_a.id && space_b.id
+    end
+
+  end
 end
