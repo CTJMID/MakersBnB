@@ -1,4 +1,5 @@
 require 'pg'
+require 'conn'
 
 class User
   attr_reader :email
@@ -8,13 +9,7 @@ class User
   end
 
   def self.unique?(email:)
-    if ENV['RACK_ENV'] == 'test'
-      conn = PG.connect(dbname: 'makersbnb_test')
-    else
-      conn = PG.connect(dbname: 'makersbnb')
-    end
-
-    result = conn.exec("SELECT * FROM users WHERE email = '#{email}'")
+    result = Conn.query("SELECT * FROM users WHERE email = '#{email}'")
 
     if result.ntuples.zero?
       true
@@ -25,14 +20,7 @@ class User
   end
 
   def self.create(email:, password:)
-    if ENV['RACK_ENV'] == 'test'
-      conn = PG.connect(dbname: 'makersbnb_test')
-    else
-      conn = PG.connect(dbname: 'makersbnb')
-    end
-
-    
-    result = conn.exec_params("INSERT INTO users (email, password) VALUES ($1, $2) RETURNING email;",
+    result = Conn.query("INSERT INTO users (email, password) VALUES ($1, $2) RETURNING email;",
                               [email, password])     
     User.new(email: result[0]['email'])
   end

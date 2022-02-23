@@ -1,4 +1,4 @@
-feature "list a space" do
+feature "add a space" do
   scenario "User submits a form to submit a listing" do
     visit('/spaces/new')
 

@@ -3,9 +3,8 @@ require 'space'
 describe Space do
   describe '.all' do
     it 'returns all spaces' do
-      conn = PG.connect(dbname: 'makersbnb_test')
-      conn.exec("INSERT INTO spaces (title) VALUES ('Space A');")
-      conn.exec("INSERT INTO spaces (title) VALUES ('Space B');")
+      Space.create('Space A')
+      Space.create('Space B')
       spaces = Space.all
       expect(spaces[0].title).to eq 'Space A'
       expect(spaces[1].title).to eq 'Space B'
@@ -14,15 +13,10 @@ describe Space do
 
   describe '#create' do
     it 'creates a new listing for a space' do
-      if ENV['RACK_ENV'] == 'test'
-        conn = PG.connect(dbname: 'makersbnb_test')
-      else
-        conn = PG.connect(dbname: 'makersbnb')
-      end
-      conn.exec("INSERT INTO spaces (title) VALUES ('Test listing')")
-      result = conn.exec('SELECT * FROM spaces')
-      spaces = result.map { |space| space['title'] }
-      expect(spaces).to include 'Test listing'
+      Space.create('Test listing')
+      spaces = Space.all
+      #spaces = result.map { |space| space['title'] }
+      expect(spaces.first.title).to include 'Test listing'
     end
   end
 
