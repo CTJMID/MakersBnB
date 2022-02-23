@@ -18,16 +18,17 @@
                     <div class='card-body'>
                         <h5 class='card-title'><%= space.title %></h5>
                         <p class='card-text'><%= space.description %></p>
-                    </div>
-                    '£50 per night'
+                        <p class='card-text'><strong>£<%= space.price.to_f %> per night</strong> </p>
+                    
                     <% if space.available == true %>
                         <form action="/book" method='post'>
-                            <input type="hidden" name="id" value="<%= space.id %>"> 
-                            <input type="submit" value="Book">
+                           <input type="hidden" name="id" value="<%= space.id %>"> 
+                          <p><input class="btn btn-primary" type="submit" value="Book"></p>
                         </form>
                     <% else %>
                         <p>Unavailable</p>
                     <% end %>
+                    </div>
 
                 </div>
             <% end %>

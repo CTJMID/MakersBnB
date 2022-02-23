@@ -19,13 +19,14 @@ class Space
   def self.all
     result = Conn.query('SELECT * FROM spaces')
     result.map do |space|
-      Space.new(id: space['id'], title: space['title'], available: space['available'], description: space['description'], price: space['price'])
+      Space.new(id: space['id'], title: space['title'], available: space['available'], description: space['description'], price: (space['price']).to_f.round(2))
     end
   end
 
   def self.create(title, description, price)
-  result = Conn.query("INSERT INTO spaces (title, description, price) VALUES ('#{title}', '#{description}', '#{price}') RETURNING id, title, available, description, price;")
-    Space.new(id: result[0]['id'], title: result[0]['title'], available: result[0]['available'], description: result[0]['description'], price: result[0]['price'])
+    # if price >= 1000 then fail with error message
+    result = Conn.query("INSERT INTO spaces (title, description, price) VALUES ('#{title}', '#{description}', '#{price}') RETURNING id, title, available, description, price;")
+    Space.new(id: result[0]['id'], title: result[0]['title'], available: result[0]['available'], description: result[0]['description'], price: (result[0]['price']).to_f)
   end
 
   def self.book(id)

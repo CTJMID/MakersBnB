@@ -10,7 +10,7 @@ feature "add a space" do
     expect(page.status_code).to be(200)
     expect(page).to have_content 'Nice bedroom'
     expect(page).to have_content 'This is a really but really really nice bedroom'
-    expect(page).to have_content '£50 per night'
+    expect(page).to have_content '£50.00 per night'
   end
 end
 

@@ -10,8 +10,8 @@ describe Space do
       expect(spaces[1].title).to eq 'Space B'
       expect(spaces[0].description).to eq 'Test description A'
       expect(spaces[1].description).to eq 'Test description B'
-      expect(spaces[0].price).to eq '30.00'
-      expect(spaces[1].price).to eq '50.00'
+      expect(spaces[0].price).to eq 30.00
+      expect(spaces[1].price).to eq 50.00
     end
   end
 
@@ -20,9 +20,9 @@ describe Space do
       Space.create('Test listing', 'Test description', 50)
       spaces = Space.all
      
-      expect(spaces.first.title).to include 'Test listing'
-      expect(spaces.first.description).to include 'Test description'
-      expect(spaces.first.price).to include '50.00'
+      expect(spaces.first.title).to eq 'Test listing'
+      expect(spaces.first.description).to eq 'Test description'
+      expect(spaces.first.price).to eq 50.00
     end
   end
 
