@@ -30,7 +30,7 @@ class MakersBnB < Sinatra::Base
   end
 
   post '/spaces' do
-    Space.create(params['title'])
+    Space.create(params['title'], params['description'])
     redirect '/spaces'
   end
 
