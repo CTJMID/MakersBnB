@@ -7,18 +7,37 @@ describe Booking do
       booking = Booking.create('2022-02-23', '2022-02-25', space.id)
 
       expect(booking.spaces_id).to eq space.id
-      
+    end
+
+    it 'Does not create a new booking if unavailable' do
+      space = Space.create('Space A')
+      booking = Booking.create('2022-02-23', '2022-02-25', space.id)
+
+      expect(Booking.create('2022-02-23', '2022-02-25', space.id)).to eq 'Unavailable'
     end
   end
 
 
-  # describe 'self.booking' do
-  #   it 'Checks if a booking can be made on particular dates' do
-  #     space = Space.create('Space A')
+  describe 'self.booking' do
+    it 'Checks if a booking can be made on an empty table' do
+      space = Space.create('Space A')
+      expect(Booking.available?('2022-02-23', '2022-02-25', space.id)).to be true
+    end
 
-  #     Booking.create('2022-02-23', '2022-02-25', space.id)
+    it 'Checks if a booking can be made on particular dates' do
+      space = Space.create('Space A')
+      Booking.create('2022-02-23', '2022-02-25', space.id)
 
-  #     expect(Booking.available?('2022-02-23', '2022-02-25')).to be true
-  #   end
-  # end
+      expect(Booking.available?('2022-02-20', '2022-02-21', space.id)).to be true
+      expect(Booking.available?('2022-02-20', '2022-02-23', space.id)).to be true
+      expect(Booking.available?('2022-02-20', '2022-02-24', space.id)).to be false
+      expect(Booking.available?('2022-02-23', '2022-02-24', space.id)).to be false
+      expect(Booking.available?('2022-02-23', '2022-02-25', space.id)).to be false
+      expect(Booking.available?('2022-02-24', '2022-02-25', space.id)).to be false
+      expect(Booking.available?('2022-02-24', '2022-02-26', space.id)).to be false
+      expect(Booking.available?('2022-02-25', '2022-02-26', space.id)).to be true
+      expect(Booking.available?('2022-02-26', '2022-02-27', space.id)).to be true
+      expect(Booking.available?('2022-02-20', '2022-02-27', space.id)).to be false
+    end
+  end
 end

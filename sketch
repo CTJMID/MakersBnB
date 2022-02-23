@@ -1,5 +1,0 @@
-SELECT * FROM bookings
-WHERE spaces_id = 272
-AND (DATE('2022-02-20') >= start_date AND DATE('2022-02-20') < end_date)
-OR (DATE('2022-02-27') > start_date AND DATE('2022-02-27') <= end_date)
-OR (DATE('2022-02-20') <= start_date AND DATE('2022-02-27') >= end_date) ;
