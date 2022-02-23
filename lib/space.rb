@@ -1,5 +1,4 @@
-require 'pg'
-require 'conn'
+require_relative './conn'
 
 class Space
   attr_reader :id, :title, :available
@@ -20,6 +19,18 @@ class Space
       Space.new(id: space['id'], title: space['title'], available: space['available'] )
     end
   end
+
+  # def self.selection(start_date, end_date)
+  #   all_available = []
+  #   ids = Booking.not_available(start_date, end_date)
+  #   ids.each { |id|
+  #     result = Conn.query(
+  #       "SELECT * FROM spaces
+  #       WHERE ID NOT #{id};"
+  #     )
+  #     all_available << result
+  #   }
+  # end
 
   def self.create(title)
     result = Conn.query("INSERT INTO spaces (title) VALUES ('#{title}') RETURNING id, title, available;")
