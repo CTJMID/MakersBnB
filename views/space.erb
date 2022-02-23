@@ -9,8 +9,15 @@
 <body>
     <div class='container'>
       
-        <h1>Maker's B'n'B</h1>
-
+        <h1 class="text-center">Makers B'n'B</h1>
+        <br>
+        <br>
+        <h2 class="text-center">Find the space of your dreams.</h2>
+        <br>
+        <div class="d-grid gap-2 col-6 mx-auto">
+        <a href="spaces/new" class="btn btn-primary" role="button" data-bs-toggle="button">Add a space</a>
+        </div>      
+        <br>
         <div class='row'>
             <% @spaces.each do |space| %>
                 <div class='card m-2 pt-3' style='width: 18rem;'>
