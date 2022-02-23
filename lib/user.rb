@@ -1,5 +1,5 @@
 require 'pg'
-require 'conn'
+require_relative './conn'
 
 class User
   attr_reader :email

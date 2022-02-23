@@ -9,24 +9,33 @@
 <body>
     <div class='container'>
       
-        <h1>Maker's B'n'B</h1>
-
+        <h1 class="text-center">Makers B'n'B</h1>
+        <br>
+        <br>
+        <h2 class="text-center">Find the space of your dreams.</h2>
+        <br>
+        <div class="d-grid gap-2 col-6 mx-auto">
+        <a href="spaces/new" class="btn btn-primary" role="button" data-bs-toggle="button">Add a space</a>
+        </div>      
+        <br>
         <div class='row'>
             <% @spaces.each do |space| %>
                 <div class='card m-2 pt-3' style='width: 18rem;'>
                     <img src="https://www.rocketmortgage.com/resources-cmsassets/RocketMortgage.com/Article_Images/Large_Images/TypesOfHomes/types-of-homes-hero.jpg" class='card-image-top' alt='housepic'>
                     <div class='card-body'>
                         <h5 class='card-title'><%= space.title %></h5>
-                    </div>
-
+                        <p class='card-text'><%= space.description %></p>
+                        <p class='card-text'><strong>£<%= space.price %> per night</strong> </p>
+                    
                     <% if space.available == true %>
                         <form action="/book" method='post'>
-                            <input type="hidden" name="id" value="<%= space.id %>"> 
-                            <input type="submit" value="Book">
+                           <input type="hidden" name="id" value="<%= space.id %>"> 
+                          <p><input class="btn btn-primary" type="submit" value="Book"></p>
                         </form>
                     <% else %>
                         <p>Unavailable</p>
                     <% end %>
+                    </div>
 
                 </div>
             <% end %>
