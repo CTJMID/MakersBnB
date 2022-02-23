@@ -25,7 +25,7 @@
                     <div class='card-body'>
                         <h5 class='card-title'><%= space.title %></h5>
                         <p class='card-text'><%= space.description %></p>
-                        <p class='card-text'><strong>£<%= space.price %> per night</strong> </p>
+                        <p class='card-text'><strong>£<%= '%.2f' % space.price %> per night</strong> </p>
                     
                     <% if space.available == true %>
                         <form action="/book" method='post'>
@@ -36,11 +36,9 @@
                         <p>Unavailable</p>
                     <% end %>
                     </div>
-
                 </div>
             <% end %>
         </div>
-
     </div>
 
 </body>
