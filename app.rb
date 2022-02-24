@@ -48,6 +48,10 @@ class MakersBnB < Sinatra::Base
     erb :'signup'
   end
 
+  get '/confirmation' do
+    erb :'confirmation'
+  end
+
   post '/spaces' do
     Space.create(params['title'], params['description'], params['price'])
     redirect '/spaces'
@@ -55,7 +59,7 @@ class MakersBnB < Sinatra::Base
 
   post '/book' do
     Space.book(params['available_from'], params['available_to'], params['id'])
-    redirect '/spaces'
+    redirect '/confirmation'
   end
 
   post '/signup' do

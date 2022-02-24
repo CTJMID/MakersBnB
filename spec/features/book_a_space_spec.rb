@@ -14,6 +14,9 @@ feature "Ability to book a space" do
 
     click_button('Book')
 
+    expect(page).to have_content 'Booking confirmed!'
+    click_link('Return home')
+
     fill_in('available_from', with: '2022-02-23')
     fill_in('available_to', with: '2022-02-25')
     click_button('List Spaces')
