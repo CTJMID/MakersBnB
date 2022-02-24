@@ -36,7 +36,14 @@ describe Space do
   end
 
   describe '.book' do
+    it 'should make a booking' do
+      space_a = Space.create('Space A', 'Test description', 50)
+      booking = Space.book('2022-02-23', '2022-02-25', space_a.id)
+      result = Conn.query("SELECT * FROM bookings WHERE id = #{booking.id}")
 
+      expect(result.first['spaces_id']).to eq space_a.id
+      expect(result.first['id']).to eq booking.id
+    end
   end
 
   describe '.selection' do

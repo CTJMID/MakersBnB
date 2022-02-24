@@ -9,7 +9,6 @@ feature 'sign up' do
 
   scenario 'user signs up with an existing email address' do
     user = User.create(email: 'test@test.com', password: 'pwd1234')
-    p user
     visit '/signup'
     fill_in('email', with: 'test@test.com')
     fill_in 'password', with: 'pwd1234'
