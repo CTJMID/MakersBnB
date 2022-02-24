@@ -29,7 +29,11 @@ describe User do
       user = User.create(email: 'test@test.com', password: 'Password1234')
       auth_user = User.authenticate(email:'test@test.com', password: 'Password1234')
       expect(auth_user.id).to eq(user.id)
-      
+    end
+
+    it 'returns nil given an email address not in database' do
+      user = User.create(email: 'test@test.com', password: 'Password1234')
+      expect(User.authenticate(email: 'wrongemail@notindb.com', password: 'Password1234')).to be_nil   
     end
   end
 end

@@ -8,4 +8,15 @@ feature 'authetication' do
 
         expect(page).to have_content('Welcome test@test.com')
     end
+
+    scenario 'a user sees an error if the email is not in DB' do 
+        User.create(email: 'test@test.com', password: '12345') 
+        visit '/sessions/new'
+        fill_in('email', with: 'wrongemail@notindb.com')
+        fill_in('password', with: '12345')
+        click_button('Log-in')
+
+        expect(page).not_to have_content('Welcome test@test.com')
+        expect(page).to have_content('Please check your email or password')
+    end 
 end

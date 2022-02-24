@@ -25,6 +25,7 @@ class User
 
   def self.authenticate(email:, password:)
     result = Conn.query("SELECT * FROM users WHERE email = $1", [email])
+    return nil unless result.any?
     user = User.new(id: result[0]['id'], email: result[0]['email'], password: result[0]['password'])
   end
 end

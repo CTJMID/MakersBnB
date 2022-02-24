@@ -1,5 +1,6 @@
 require 'sinatra/base'
 require 'sinatra/reloader'
+require 'sinatra/flash'
 require './lib/space'
 require './lib/user'
 require './lib/database_connection_setup'
@@ -9,6 +10,7 @@ class MakersBnB < Sinatra::Base
     register Sinatra::Reloader
   end
 
+  register Sinatra::Flash
   enable :sessions
 
   get '/' do
@@ -17,6 +19,7 @@ class MakersBnB < Sinatra::Base
 
   get '/spaces' do
     @spaces = Space.all
+    @user_email = session[:user_email] 
     erb :'space'
   end
 
@@ -32,7 +35,6 @@ class MakersBnB < Sinatra::Base
   get '/sessions/new' do
     erb :'sessions/new'
   end
-
 
   post '/spaces' do
     Space.create(params['title'], params['description'], params['price'])
@@ -55,12 +57,16 @@ class MakersBnB < Sinatra::Base
   end
 
   post '/sessions' do
-    result = Conn.query("SELECT * FROM users WHERE email = $1",[params[:email]])
-    user = User.new(id: result[0]['id'], email: result[0]['email'], password: result[0]['password'])
-    session[:user_id] = user.id
-    redirect '/spaces'
+    user = User.authenticate(email: params[:email], password: params[:password])
+    if user
+      session[:user_id] = user.id
+      session[:user_email] = user.email
+      redirect '/spaces'
+    else
+      flash[:notice] = 'Please check your email or password'
+      redirect '/sessions/new'
+    end
   end
-
 
   run! if app_file == $0
 end
