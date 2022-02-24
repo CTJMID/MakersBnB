@@ -26,8 +26,8 @@ class User
 
   def self.authenticate(email:, password:)
     result = Conn.query("SELECT * FROM users WHERE email = $1", [email])
-    return nil unless result.any?
-    return nil unless BCrypt::Password.new(result[0]['password']) == password
+    return unless result.any?
+    return unless BCrypt::Password.new(result[0]['password']) == password
     user = User.new(id: result[0]['id'], email: result[0]['email'])
   end
 end

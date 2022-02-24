@@ -13,7 +13,7 @@
     <h1 class="text-center">Your home away from home!</h1>
     <br>
     <br>
-    <h2 class="text-center">Sign up to MakersBnB here.</h2>
+    <h2 class="text-center">Sign up to MakersBnB, or <a href='/sessions/new'>log-in</a>.</h2>
     <br>
     <div class="border border-5 p-4">
       <form action='/signup' method=POST>
@@ -35,7 +35,7 @@
       </div>
       <% else %>
       <div class="alert alert-success" role="alert">
-        <%= @user.email %> has been registered.
+        <%= @user.email %> has been registered. <a href='/sessions/new'>Log-in</a>.
       </div>
       <% end %>
     </div>
