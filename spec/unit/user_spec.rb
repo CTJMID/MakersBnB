@@ -1,5 +1,6 @@
 require './lib/user'
 
+
 describe User do
   describe '#initialize' do
     it 'should return email' do
@@ -34,6 +35,11 @@ describe User do
     it 'returns nil given an email address not in database' do
       user = User.create(email: 'test@test.com', password: 'Password1234')
       expect(User.authenticate(email: 'wrongemail@notindb.com', password: 'Password1234')).to be_nil   
+    end
+
+    it 'returns nilgiven an incorrect password' do
+      user = User.create(email: 'test@test.com', password: 'Password1234')
+      expect(User.authenticate(email: 'test@test.com', password: 'wrongpassword')).to be_nil   
     end
   end
 end
