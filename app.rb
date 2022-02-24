@@ -2,6 +2,7 @@ require 'sinatra/base'
 require 'sinatra/reloader'
 require './lib/space'
 require './lib/user'
+require './lib/booking'
 require './lib/database_connection_setup'
 
 class MakersBnB < Sinatra::Base
@@ -16,8 +17,19 @@ class MakersBnB < Sinatra::Base
   end
 
   get '/spaces' do
+    @date_order_error = false
+
     if params.key?('available_from')
-      @spaces = Space.selection(params['available_from'], params['available_to'])
+      @available_from = params['available_from']
+      @available_to = params['available_to']
+
+      if @available_from > @available_to
+        @spaces = Space.all
+        @date_order_error = true
+      else
+        @spaces = Space.selection(@available_from, @available_to)
+      end
+
     else
       @spaces = Space.all
     end

@@ -19,25 +19,29 @@
         </div>      
         <br>
 
-        <form class="row row-cols-lg-auto g-3 align-items-center">
-            <div class="col-12">
-                <label class="visually-hidden" for="inlineFormInputAvailableFrom">Available From...</label>
+        <form class="row g-3 align-items-center">
+            <div class="col-5">
+                <label for="inlineFormInputAvailableFrom">Available From...</label>
                 <div class="input-group">
-                <input type="date" class="form-control" id="inlineFormInputAvailableFrom" name="available_from" required>
+                <input value="<%=@available_from%>" type="date" class="form-control" id="inlineFormInputAvailableFrom" name="available_from" required>
                 </div>
             </div>
 
-            <div class="col-12">
-                <label class="visually-hidden" for="inlineFormInputAvailableTo">Available To...</label>
+            <div class="col-5">
+                <label for="inlineFormInputAvailableTo">Available To...</label>
                 <div class="input-group">
-                <input type="date" class="form-control" id="inlineFormInputAvailableTo" name="available_to" required>
+                <input value="<%=@available_to%>" type="date" class="form-control" id="inlineFormInputAvailableTo" name="available_to" required>
                 </div>
             </div>
 
-            <div class="col-12">
-                <button type="submit" class="btn btn-primary">List Spaces</button>
+            <div class="col-2">
+                <button type="submit" id="button" class="btn btn-primary">List Spaces</button>
             </div>
         </form>
+
+        <% if @date_order_error == true %>
+            <p style='color: red'>Your 'Available To' date must be after your 'Available From' date</p>
+        <% end %>
 
 
         <div class='row'>
