@@ -3,12 +3,11 @@ require_relative './conn'
 require 'bcrypt'
 
 class User
-  attr_reader :email, :id, :password
+  attr_reader :email, :id
 
-  def initialize(id:, email:, password:)
+  def initialize(id:, email:)
     @id = id
     @email = email
-    @password = password
   end
 
   def self.unique?(email:)
@@ -20,16 +19,16 @@ class User
 
   def self.create(email:, password:)
     encrypted_password = BCrypt::Password.create(password)
-    result = Conn.query("INSERT INTO users (email, password) VALUES ($1, $2) RETURNING id, email, password;",
+    result = Conn.query("INSERT INTO users (email, password) VALUES ($1, $2) RETURNING id, email;",
                               [email, encrypted_password])     
-    User.new(id: result[0]['id'], email: result[0]['email'], password: result[0]['password'])
+    User.new(id: result[0]['id'], email: result[0]['email'])
   end
 
   def self.authenticate(email:, password:)
     result = Conn.query("SELECT * FROM users WHERE email = $1", [email])
     return nil unless result.any?
     return nil unless BCrypt::Password.new(result[0]['password']) == password
-    user = User.new(id: result[0]['id'], email: result[0]['email'], password: result[0]['password'])
+    user = User.new(id: result[0]['id'], email: result[0]['email'])
   end
 end
 

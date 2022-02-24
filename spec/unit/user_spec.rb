@@ -4,7 +4,7 @@ require './lib/user'
 describe User do
   describe '#initialize' do
     it 'should return email' do
-      user = User.new(id: '1', email: 'test@test.com', password: 'Password1234')
+      user = User.new(id: '1', email: 'test@test.com')
       expect(user.email).to eq('test@test.com')
     end
   end
