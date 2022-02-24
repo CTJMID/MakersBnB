@@ -23,12 +23,12 @@ class Space
   end
   
   def self.selection(start_date, end_date)
-    ids_not_available = Booking.not_available(start_date, end_date)
+    ids_all_not_available = Booking.all_not_available(start_date, end_date)
 
-    if ids_not_available.empty?
+    if ids_all_not_available.empty?
       Space.all
     else
-      result = Conn.query("SELECT * FROM spaces WHERE NOT id IN (#{ids_not_available})")
+      result = Conn.query("SELECT * FROM spaces WHERE NOT id IN (#{ids_all_not_available})")
       result.map do |space|
         Space.new(id: space['id'], title: space['title'], description: space['description'], price: (space['price']).to_f.round(2))
       end

@@ -52,6 +52,14 @@ class MakersBnB < Sinatra::Base
     erb :'confirmation'
   end
 
+  post '/spaces/book' do
+    @title = params['title']
+    @price = params['price']
+    @description = params['description']
+    @booked_dates = Booking.space_dates_not_available(params['id'])
+    erb :'spaces/book'
+  end
+
   post '/spaces' do
     Space.create(params['title'], params['description'], params['price'])
     redirect '/spaces'
@@ -59,7 +67,7 @@ class MakersBnB < Sinatra::Base
 
   post '/book' do
     Space.book(params['available_from'], params['available_to'], params['id'])
-    redirect '/confirmation'
+    redirect '/book'
   end
 
   post '/signup' do
