@@ -35,9 +35,11 @@ class Booking
       OR (DATE('#{start_date}') <= start_date AND DATE('#{end_date}') >= end_date) ;"
     )
 
-    result.map do |spaces| 
+    ids = result.map do |spaces| 
       spaces['spaces_id']
     end
+
+    ids.join(", ")
   end
 
   def self.create(start_date, end_date, spaces_id)

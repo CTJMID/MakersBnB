@@ -18,7 +18,30 @@
         <a href="spaces/new" class="btn btn-primary" role="button" data-bs-toggle="button">Add a space</a>
         </div>      
         <br>
+
+        <form class="row row-cols-lg-auto g-3 align-items-center">
+            <div class="col-12">
+                <label class="visually-hidden" for="inlineFormInputAvailableFrom">Available From...</label>
+                <div class="input-group">
+                <input type="date" class="form-control" id="inlineFormInputAvailableFrom" name="available_from" required>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <label class="visually-hidden" for="inlineFormInputAvailableTo">Available To...</label>
+                <div class="input-group">
+                <input type="date" class="form-control" id="inlineFormInputAvailableTo" name="available_to" required>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">List Spaces</button>
+            </div>
+        </form>
+
+
         <div class='row'>
+
             <% @spaces.each do |space| %>
                 <div class='card m-2 pt-3' style='width: 18rem;'>
                     <img src="https://www.rocketmortgage.com/resources-cmsassets/RocketMortgage.com/Article_Images/Large_Images/TypesOfHomes/types-of-homes-hero.jpg" class='card-image-top' alt='housepic'>

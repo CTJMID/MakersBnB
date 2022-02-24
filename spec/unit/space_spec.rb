@@ -51,6 +51,19 @@ describe Space do
       expect(spaces.first.available).to be false
     end
   end
+
+  describe '.selection' do
+    it 'Only returns availble spaces based on specific dates' do
+      space_a = Space.create('Space A', 'Test description', 50)
+      space_b = Space.create('Space B', 'Test description', 50)
+      Booking.create('2022-02-23', '2022-02-25', space_a.id)
+      Booking.create('2022-02-27', '2022-02-28', space_b.id)
+
+      selection = Space.selection('2022-02-23', '2022-02-25')
+
+      expect(selection.first.title).to eq space_b.title
+    end
+  end
 end
 
 

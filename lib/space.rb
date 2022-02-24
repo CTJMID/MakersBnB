@@ -27,17 +27,14 @@ class Space
     Space.new(id: result[0]['id'], title: result[0]['title'], available: result[0]['available'], description: result[0]['description'], price: (result[0]['price']).to_f)
   end
   
-  # def self.selection(start_date, end_date)
-  #   all_available = []
-  #   ids = Booking.not_available(start_date, end_date)
-  #   ids.each { |id|
-  #     result = Conn.query(
-  #       "SELECT * FROM spaces
-  #       WHERE ID NOT #{id};"
-  #     )
-  #     all_available << result
-  #   }
-  # end
+  def self.selection(start_date, end_date)
+    ids_not_available = Booking.not_available(start_date, end_date)
+
+    result = Conn.query("SELECT * FROM spaces WHERE NOT id IN (#{ids_not_available})")
+    result.map do |space|
+      Space.new(id: space['id'], title: space['title'], available: space['available'], description: space['description'], price: (space['price']).to_f.round(2))
+    end
+  end
 
   def self.book(id)
     Conn.query("UPDATE spaces SET available = FALSE WHERE id=' #{id} ';")

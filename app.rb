@@ -16,7 +16,12 @@ class MakersBnB < Sinatra::Base
   end
 
   get '/spaces' do
-    @spaces = Space.all
+    if params.key?('available_from')
+      @spaces = Space.selection(params['available_from'], params['available_to'])
+    else
+      @spaces = Space.all
+    end
+
     erb :'space'
   end
 
