@@ -11,11 +11,7 @@ class User
   def self.unique?(email:)
     result = Conn.query("SELECT * FROM users WHERE email = '#{email}'")
 
-    if result.ntuples.zero?
-      true
-    else
-      false
-    end
+    result.ntuples.zero? ? true : false
 
   end
 
