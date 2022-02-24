@@ -18,6 +18,7 @@ class MakersBnB < Sinatra::Base
 
   get '/spaces' do
     @date_order_error = false
+    @show_button = false
 
     if params.key?('available_from')
       @available_from = params['available_from']
@@ -28,6 +29,7 @@ class MakersBnB < Sinatra::Base
         @date_order_error = true
       else
         @spaces = Space.selection(@available_from, @available_to)
+        @show_button = true
       end
 
     else
@@ -52,7 +54,7 @@ class MakersBnB < Sinatra::Base
   end
 
   post '/book' do
-    Space.book(params['id'])
+    Space.book(params['available_from'], params['available_to'], params['id'])
     redirect '/spaces'
   end
 

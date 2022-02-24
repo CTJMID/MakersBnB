@@ -54,14 +54,15 @@
                         <p class='card-text'><%= space.description %></p>
                         <p class='card-text'><strong>£<%= '%.2f' % space.price %> per night</strong> </p>
                     
-                    <% if space.available == true %>
+                        <% if @show_button == true %>
                         <form action="/book" method='post'>
+                            <input type="hidden" name="available_from" value="<%= @available_from %>">
+                            <input type="hidden" name="available_to" value="<%= @available_to %>">
                            <input type="hidden" name="id" value="<%= space.id %>"> 
                           <p><input class="btn btn-primary" type="submit" value="Book"></p>
                         </form>
-                    <% else %>
-                        <p>Unavailable</p>
-                    <% end %>
+                        <% end %>
+
                     </div>
                 </div>
             <% end %>

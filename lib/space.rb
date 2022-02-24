@@ -1,16 +1,11 @@
 require_relative './conn'
 
 class Space
-  attr_reader :id, :title, :available, :description, :price
+  attr_reader :id, :title, :description, :price
 
-  def initialize(id:, title:, available:, description:, price:)
+  def initialize(id:, title:, description:, price:)
     @id = id
     @title = title
-      if available == 't'
-        @available = true
-      else
-        @available = false
-      end
     @description = description
     @price = price
   end
@@ -18,13 +13,13 @@ class Space
   def self.all
     result = Conn.query('SELECT * FROM spaces')
     result.map do |space|
-      Space.new(id: space['id'], title: space['title'], available: space['available'], description: space['description'], price: (space['price']).to_f.round(2))
+      Space.new(id: space['id'], title: space['title'], description: space['description'], price: (space['price']).to_f.round(2))
     end
   end
 
   def self.create(title, description, price)
-    result = Conn.query("INSERT INTO spaces (title, description, price) VALUES ('#{title}', '#{description}', '#{price}') RETURNING id, title, available, description, price;")
-    Space.new(id: result[0]['id'], title: result[0]['title'], available: result[0]['available'], description: result[0]['description'], price: (result[0]['price']).to_f)
+    result = Conn.query("INSERT INTO spaces (title, description, price) VALUES ('#{title}', '#{description}', '#{price}') RETURNING id, title, description, price;")
+    Space.new(id: result[0]['id'], title: result[0]['title'], description: result[0]['description'], price: (result[0]['price']).to_f)
   end
   
   def self.selection(start_date, end_date)
@@ -35,13 +30,13 @@ class Space
     else
       result = Conn.query("SELECT * FROM spaces WHERE NOT id IN (#{ids_not_available})")
       result.map do |space|
-        Space.new(id: space['id'], title: space['title'], available: space['available'], description: space['description'], price: (space['price']).to_f.round(2))
+        Space.new(id: space['id'], title: space['title'], description: space['description'], price: (space['price']).to_f.round(2))
       end
     end
   end
 
-  def self.book(id)
-    Conn.query("UPDATE spaces SET available = FALSE WHERE id=' #{id} ';")
+  def self.book(available_from, available_to, id)
+    Booking.create(available_from, available_to, id)
   end
 
 end
