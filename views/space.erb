@@ -31,8 +31,33 @@
         <h3 class="text-center"><a href='/sessions/new'>Log-in</a> or <a href='/signup'>sign-up</a>.</h3>
         <% end %>
         <br>
- 
+
+        <form class="row g-3 align-items-center">
+            <div class="col-5">
+                <label for="inlineFormInputAvailableFrom">Available From...</label>
+                <div class="input-group">
+                <input value="<%=@available_from%>" type="date" class="form-control" id="inlineFormInputAvailableFrom" name="available_from" required>
+                </div>
+            </div>
+
+            <div class="col-5">
+                <label for="inlineFormInputAvailableTo">Available To...</label>
+                <div class="input-group">
+                <input value="<%=@available_to%>" type="date" class="form-control" id="inlineFormInputAvailableTo" name="available_to" required>
+                </div>
+            </div>
+
+            <div class="col-2">
+                <button type="submit" id="button" class="btn btn-primary">List Spaces</button>
+            </div>
+        </form>
+
+        <% if @date_order_error == true %>
+            <p style='color: red'>Your 'Available To' date must be after your 'Available From' date</p>
+        <% end %>
+
         <div class='row'>
+
             <% @spaces.each do |space| %>
                 <div class='card m-2 pt-3' style='width: 18rem;'>
                     <img src="https://www.rocketmortgage.com/resources-cmsassets/RocketMortgage.com/Article_Images/Large_Images/TypesOfHomes/types-of-homes-hero.jpg" class='card-image-top' alt='housepic'>
@@ -40,15 +65,18 @@
                         <h5 class='card-title'><%= space.title %></h5>
                         <p class='card-text'><%= space.description %></p>
                         <p class='card-text'><strong>£<%= '%.2f' % space.price %> per night</strong> </p>
-            
-                    <% if space.available == true %>
-                        <form action="/book" method='post'>
+
+                    
+                        <% if @show_button == true %>
+                        <form action="/spaces/book" method="post">
+                            <input type="hidden" name="title" value="<%= space.title %>">
+                            <input type="hidden" name="description" value="<%= space.description %>">
+                            <input type="hidden" name="price" value="<%= space.price %>">
                            <input type="hidden" name="id" value="<%= space.id %>"> 
                           <p><input class="btn btn-primary" type="submit" value="Book"></p>
                         </form>
-                    <% else %>
-                        <p>Unavailable</p>
-                    <% end %>
+                        <% end %>
+           
 
                     </div>
                 </div>

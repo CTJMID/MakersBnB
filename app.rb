@@ -3,6 +3,7 @@ require 'sinatra/reloader'
 require 'sinatra/flash'
 require './lib/space'
 require './lib/user'
+require './lib/booking'
 require './lib/database_connection_setup'
 
 class MakersBnB < Sinatra::Base
@@ -18,8 +19,25 @@ class MakersBnB < Sinatra::Base
   end
 
   get '/spaces' do
-    @spaces = Space.all
     @user_email = session[:user_email] 
+    @date_order_error = false
+    @show_button = false
+
+    if params.key?('available_from')
+      @available_from = params['available_from']
+      @available_to = params['available_to']
+
+      if @available_from > @available_to
+        @spaces = Space.all
+        @date_order_error = true
+      else
+        @spaces = Space.selection(@available_from, @available_to)
+        @show_button = true
+      end
+
+    else
+      @spaces = Space.all
+    end
     erb :'space'
   end
 
@@ -30,6 +48,18 @@ class MakersBnB < Sinatra::Base
   get '/signup' do
     @user = session[:user]
     erb :'signup'
+  end
+  
+  get '/confirmation' do
+    erb :'confirmation'
+  end
+
+  post '/spaces/book' do
+    @title = params['title']
+    @price = params['price']
+    @description = params['description']
+    @booked_dates = Booking.space_dates_not_available(params['id'])
+    erb :'spaces/book'
   end
 
   get '/sessions/new' do
@@ -42,8 +72,8 @@ class MakersBnB < Sinatra::Base
   end
 
   post '/book' do
-    Space.book(params['id'])
-    redirect '/spaces'
+    Space.book(params['available_from'], params['available_to'], params['id'])
+    redirect '/book'
   end
 
   post '/signup' do

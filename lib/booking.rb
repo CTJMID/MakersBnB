@@ -27,7 +27,7 @@ class Booking
     end
   end
 
-  def self.not_available(start_date, end_date)
+  def self.all_not_available(start_date, end_date)
     result = Conn.query(
       "SELECT * FROM bookings
       WHERE (DATE('#{start_date}') >= start_date AND DATE('#{start_date}') < end_date)
@@ -35,9 +35,40 @@ class Booking
       OR (DATE('#{start_date}') <= start_date AND DATE('#{end_date}') >= end_date) ;"
     )
 
-    result.map do |spaces| 
+    ids = result.map do |spaces| 
       spaces['spaces_id']
     end
+
+    ids.join(", ")
+  end
+
+  def self.space_dates_not_available(spaces_id)
+    booked_dates = []
+
+    result = Conn.query("SELECT * FROM bookings WHERE spaces_id='#{spaces_id}';")
+
+    bookings = result.map do |booking|
+      Booking.new(id: booking['id'], start_date: booking['start_date'], end_date: booking['end_date'], spaces_id: booking['spaces_id'])
+    end
+
+    bookings.each do |booking|
+      (booking.start_date..booking.end_date).each do |date|
+        formatted_date = ""
+        formatted_date << date[8]
+        formatted_date << date[9]
+        formatted_date << date[7]
+        formatted_date << date[5]
+        formatted_date << date[6]
+        formatted_date << date[4]
+        formatted_date << date[0]
+        formatted_date << date[1]
+        formatted_date << date[2]
+        formatted_date << date[3]
+        booked_dates << formatted_date
+      end
+    end
+
+    return booked_dates
   end
 
   def self.create(start_date, end_date, spaces_id)

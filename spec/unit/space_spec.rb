@@ -28,7 +28,7 @@ describe Space do
 
   describe '#initialize' do
     it 'should return instance of a class' do
-      space = Space.new(id: 1, title: 'Space A', available: true, description: 'Test description', price: 50)
+      space = Space.new(id: 1, title: 'Space A', description: 'Test description', price: 50)
       expect(space.title).to eq 'Space A'
       expect(space.description).to eq 'Test description'
       expect(space.price).to eq 50
@@ -36,19 +36,26 @@ describe Space do
   end
 
   describe '.book' do
-    it 'should default to be available by returning true' do
-      space = Space.create('Space A', 'Test description', 50)
-      
-      expect(space.available).to be true
-    end
-    
-    it 'should update availiblity to false' do
-      space = Space.create('Space A', 'Test description', 50)
-      id = space.id
-      Space.book(id)
-      spaces = Space.all
+    it 'should make a booking' do
+      space_a = Space.create('Space A', 'Test description', 50)
+      booking = Space.book('2022-02-23', '2022-02-25', space_a.id)
+      result = Conn.query("SELECT * FROM bookings WHERE id = #{booking.id}")
 
-      expect(spaces.first.available).to be false
+      expect(result.first['spaces_id']).to eq space_a.id
+      expect(result.first['id']).to eq booking.id
+    end
+  end
+
+  describe '.selection' do
+    it 'Only returns availble spaces based on specific dates' do
+      space_a = Space.create('Space A', 'Test description', 50)
+      space_b = Space.create('Space B', 'Test description', 50)
+      Booking.create('2022-02-23', '2022-02-25', space_a.id)
+      Booking.create('2022-02-27', '2022-02-28', space_b.id)
+
+      selection = Space.selection('2022-02-23', '2022-02-25')
+
+      expect(selection.first.title).to eq space_b.title
     end
   end
 end
