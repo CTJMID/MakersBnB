@@ -14,10 +14,24 @@
         <br>
         <h2 class="text-center">Find the space of your dreams.</h2>
         <br>
+        <br>
+        <% if @user_email %>
+        <h3 class="text-center">Welcome <%= @user_email %></h3>
         <div class="d-grid gap-2 col-6 mx-auto">
-        <a href="spaces/new" class="btn btn-primary" role="button" data-bs-toggle="button">Add a space</a>
+            <form action="sessions/destroy" method="post" class="btn">
+            <input type="submit" value="Log-out" class="btn btn-primary">
+            </form>
+        </div>
+            <div class="d-grid gap-2 col-6 mx-auto">
+            <a href="spaces/new" class="btn btn-primary" role="button" data-bs-toggle="button">Add a space</a>
         </div>      
         <br>
+        <% else %>
+        <h3 class="text-center"><%= flash[:notice] %></h3>
+        <h3 class="text-center"><a href='/sessions/new'>Log-in</a> or <a href='/signup'>sign-up</a>.</h3>
+        <% end %>
+        <br>
+ 
         <div class='row'>
             <% @spaces.each do |space| %>
                 <div class='card m-2 pt-3' style='width: 18rem;'>
@@ -26,7 +40,7 @@
                         <h5 class='card-title'><%= space.title %></h5>
                         <p class='card-text'><%= space.description %></p>
                         <p class='card-text'><strong>£<%= '%.2f' % space.price %> per night</strong> </p>
-                    
+            
                     <% if space.available == true %>
                         <form action="/book" method='post'>
                            <input type="hidden" name="id" value="<%= space.id %>"> 
@@ -35,6 +49,7 @@
                     <% else %>
                         <p>Unavailable</p>
                     <% end %>
+
                     </div>
                 </div>
             <% end %>
