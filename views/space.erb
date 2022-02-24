@@ -14,9 +14,22 @@
         <br>
         <h2 class="text-center">Find the space of your dreams.</h2>
         <br>
+        <br>
+        <% if @user_email %>
+        <h3 class="text-center">Welcome <%= @user_email %></h3>
         <div class="d-grid gap-2 col-6 mx-auto">
-        <a href="spaces/new" class="btn btn-primary" role="button" data-bs-toggle="button">Add a space</a>
+            <form action="sessions/destroy" method="post" class="btn">
+            <input type="submit" value="Log-out" class="btn btn-primary">
+            </form>
+        </div>
+            <div class="d-grid gap-2 col-6 mx-auto">
+            <a href="spaces/new" class="btn btn-primary" role="button" data-bs-toggle="button">Add a space</a>
         </div>      
+        <br>
+        <% else %>
+        <h3 class="text-center"><%= flash[:notice] %></h3>
+        <h3 class="text-center"><a href='/sessions/new'>Log-in</a> or <a href='/signup'>sign-up</a>.</h3>
+        <% end %>
         <br>
 
         <form class="row g-3 align-items-center">
@@ -43,7 +56,6 @@
             <p style='color: red'>Your 'Available To' date must be after your 'Available From' date</p>
         <% end %>
 
-
         <div class='row'>
 
             <% @spaces.each do |space| %>
@@ -53,6 +65,7 @@
                         <h5 class='card-title'><%= space.title %></h5>
                         <p class='card-text'><%= space.description %></p>
                         <p class='card-text'><strong>£<%= '%.2f' % space.price %> per night</strong> </p>
+
                     
                         <% if @show_button == true %>
                         <form action="/spaces/book" method="post">
@@ -63,6 +76,7 @@
                           <p><input class="btn btn-primary" type="submit" value="Book"></p>
                         </form>
                         <% end %>
+           
 
                     </div>
                 </div>
