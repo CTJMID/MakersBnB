@@ -29,6 +29,11 @@ class MakersBnB < Sinatra::Base
     erb :'signup'
   end
 
+  get '/sessions/new' do
+    erb :'sessions/new'
+  end
+
+
   post '/spaces' do
     Space.create(params['title'], params['description'], params['price'])
     redirect '/spaces'
@@ -48,6 +53,14 @@ class MakersBnB < Sinatra::Base
   
     redirect '/signup'
   end
+
+  post '/sessions' do
+    result = Conn.query("SELECT * FROM users WHERE email = $1",[params[:email]])
+    user = User.new(id: result[0]['id'], email: result[0]['email'], password: result[0]['password'])
+    session[:user_id] = user.id
+    redirect '/spaces'
+  end
+
 
   run! if app_file == $0
 end

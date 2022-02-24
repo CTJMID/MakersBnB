@@ -3,7 +3,7 @@ require './lib/user'
 describe User do
   describe '#initialize' do
     it 'should return email' do
-      user = User.new(email: 'test@test.com')
+      user = User.new(id: '1', email: 'test@test.com', password: 'Password1234')
       expect(user.email).to eq('test@test.com')
     end
   end
@@ -21,6 +21,15 @@ describe User do
     it 'should check if an email is unique' do
       user = User.create(email: 'test@test.com', password: 'Password1234')
       expect(User.unique?(email: user.email)).to eq false
+    end
+  end
+
+  describe '.authenticate' do
+    it 'returns a user who has enetered correct combo of email & password' do
+      user = User.create(email: 'test@test.com', password: 'Password1234')
+      auth_user = User.authenticate(email:'test@test.com', password: 'Password1234')
+      expect(auth_user.id).to eq(user.id)
+      
     end
   end
 end
