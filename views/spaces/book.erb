@@ -15,23 +15,28 @@
 
 <body>
 
+<div class="container">
+  <h1 class="text-center">Makers B'n'B</h1>
+  <br>
+  <br>
+  <h2 class="text-center">Finalise your booking</h2>
+  <br>
+  <div class="d-grid gap-2 col-6 mx-auto">
+    <p>Space title: <%=@title%></p>
+    <p>Space price: <%=@price%></p>
+    <p>Space description: <%=@description%></p>
+  </div>      
+  <br>
 
-<h1 class="text-center">Makers B'n'B</h1>
-<br>
-<br>
-<h2 class="text-center">Find the space of your dreams.</h2>
-<br>
-<div class="d-grid gap-2 col-6 mx-auto">
-  <p>Space title: <%=@title%></p>
-  <p>Space price: <%=@price%></p>
-  <p>Space description: <%=@description%></p>
-</div>      
-<br>
-
-<div class="input-group input-daterange" >
-    <input type="text" class="form-control" >
-    <div class="input-group-addon">to</div>
-    <input type="text" class="form-control" >
+  <form class="row g-3 align-items-center" action='/book' method='post'>
+    <div class="col-5 input-group input-daterange" >
+      <input type="text" class="form-control" name="available_from" required>
+      <div class="input-group-addon"> &nbsp; to &nbsp; </div>
+      <input type="text" class="form-control" name="available_to" required>
+      <input type="hidden" name="id" value="<%= @id %>"> 
+    </div>
+    <input class="btn btn-success" type="submit" value="Book now">
+  </form>
 </div>
 
 
