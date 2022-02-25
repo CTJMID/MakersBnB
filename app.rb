@@ -15,10 +15,10 @@ class MakersBnB < Sinatra::Base
   enable :sessions
 
   get '/' do
-    redirect '/spaces'
+    redirect '/spaces/?'
   end
 
-  get '/spaces' do
+  get '/spaces/?' do
     @user_email = session[:user_email] 
     @date_order_error = false
     @show_button = false
@@ -41,20 +41,22 @@ class MakersBnB < Sinatra::Base
     erb :'space'
   end
 
-  get '/spaces/new' do
+  get '/spaces/new/?' do
     erb :'spaces/new'
   end
 
-  get '/signup' do
+  get '/signup/?' do
     @user = session[:user]
     erb :'signup'
   end
   
-  get '/confirmation' do
+  get '/confirmation/?' do
+    @user_email = session[:user_email]
     erb :'confirmation'
   end
 
   post '/spaces/book' do
+    @user_email = session[:user_email]
     @available_from = DateTime.parse(params['available_from']).strftime('%d/%m/%Y')
     @available_to = DateTime.parse(params['available_to']).strftime('%d/%m/%Y')
     @title = params['title']
@@ -65,13 +67,13 @@ class MakersBnB < Sinatra::Base
     erb :'spaces/book'
   end
 
-  get '/sessions/new' do
+  get '/sessions/new/?' do
     erb :'sessions/new'
   end
 
   post '/spaces' do
     Space.create(params['title'], params['description'], params['price'])
-    redirect '/spaces'
+    redirect '/spaces/?'
   end
 
   post '/book' do
@@ -107,11 +109,6 @@ class MakersBnB < Sinatra::Base
     session.clear
     flash[:notice] = 'You have logged out'
     redirect '/spaces'
-  end
-
-  get '/test' do
-    @user_email = session[:user_email] 
-    erb :'test'
   end
 
   run! if app_file == $0
