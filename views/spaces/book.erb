@@ -23,16 +23,19 @@
   <br>
   <div class="d-grid gap-2 col-6 mx-auto">
     <p>Space title: <%=@title%></p>
-    <p>Space price: <%=@price%></p>
-    <p>Space description: <%=@description%></p>
-  </div>      
+    <p>Space price: £<%= '%.2f' % @price%></p>
+    <p>Space description: <% if @description.empty?%>
+      No description available.
+      <% else %>
+      <%=@description%><% end %></p>
+  </div>       
   <br>
 
   <form class="row g-3 align-items-center" action='/book' method='post'>
-    <div class="col-5 input-group input-daterange" >
-      <input type="text" class="form-control" name="available_from" required>
+    <div class="col-5 input-group input-daterange">
+      <input type="text" class="form-control" name="available_from" value="<%= @available_from %>" required>
       <div class="input-group-addon"> &nbsp; to &nbsp; </div>
-      <input type="text" class="form-control" name="available_to" required>
+      <input type="text" class="form-control" name="available_to" value="<%= @available_to %>" required>
       <input type="hidden" name="id" value="<%= @id %>"> 
     </div>
     <input class="btn btn-success" type="submit" value="Book now">
@@ -51,7 +54,8 @@ $('.input-daterange input').each(function() {
     $(this).datepicker( {
       startDate: '-0d',
       format: 'dd/mm/yyyy',
-      datesDisabled: booked_dates
+      datesDisabled: booked_dates,
+      weekStart: 1,
       }
     );
 });

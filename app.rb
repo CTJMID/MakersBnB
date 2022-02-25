@@ -55,6 +55,8 @@ class MakersBnB < Sinatra::Base
   end
 
   post '/spaces/book' do
+    @available_from = DateTime.parse(params['available_from']).strftime('%d-%m-%Y')
+    @available_to = DateTime.parse(params['available_to']).strftime('%d-%m-%Y')
     @title = params['title']
     @price = params['price']
     @description = params['description']

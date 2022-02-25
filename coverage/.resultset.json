@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/peterocallaghan/Projects/MakersBnB/spec/features/add_space_spec.rb": {
+      "/Users/tim/Projects/MakersBnB/spec/features/add_space_spec.rb": {
         "lines": [
           1,
           1,
@@ -22,7 +22,7 @@
           null
         ]
       },
-      "/Users/peterocallaghan/Projects/MakersBnB/spec/features/authetication_spec.rb": {
+      "/Users/tim/Projects/MakersBnB/spec/features/authetication_spec.rb": {
         "lines": [
           1,
           1,
@@ -72,7 +72,7 @@
           null
         ]
       },
-      "/Users/peterocallaghan/Projects/MakersBnB/spec/features/book_a_space_spec.rb": {
+      "/Users/tim/Projects/MakersBnB/spec/features/book_a_space_spec.rb": {
         "lines": [
           1,
           1,
@@ -105,7 +105,7 @@
           null
         ]
       },
-      "/Users/peterocallaghan/Projects/MakersBnB/spec/features/display_all_spaces_spec.rb": {
+      "/Users/tim/Projects/MakersBnB/spec/features/display_all_spaces_spec.rb": {
         "lines": [
           1,
           null,
@@ -122,7 +122,7 @@
           null
         ]
       },
-      "/Users/peterocallaghan/Projects/MakersBnB/spec/features/display_available_spaces_spec.rb": {
+      "/Users/tim/Projects/MakersBnB/spec/features/display_available_spaces_spec.rb": {
         "lines": [
           1,
           null,
@@ -148,7 +148,7 @@
           null
         ]
       },
-      "/Users/peterocallaghan/Projects/MakersBnB/spec/features/navigate_to_add_space_spec.rb": {
+      "/Users/tim/Projects/MakersBnB/spec/features/navigate_to_add_space_spec.rb": {
         "lines": [
           1,
           1,
@@ -160,7 +160,7 @@
           null
         ]
       },
-      "/Users/peterocallaghan/Projects/MakersBnB/spec/features/user_sign_up_spec.rb": {
+      "/Users/tim/Projects/MakersBnB/spec/features/user_sign_up_spec.rb": {
         "lines": [
           1,
           1,
@@ -182,7 +182,7 @@
           null
         ]
       },
-      "/Users/peterocallaghan/Projects/MakersBnB/spec/unit/booking_spec.rb": {
+      "/Users/tim/Projects/MakersBnB/spec/unit/booking_spec.rb": {
         "lines": [
           1,
           null,
@@ -252,7 +252,7 @@
           null
         ]
       },
-      "/Users/peterocallaghan/Projects/MakersBnB/spec/unit/space_spec.rb": {
+      "/Users/tim/Projects/MakersBnB/spec/unit/space_spec.rb": {
         "lines": [
           1,
           null,
@@ -319,7 +319,7 @@
           null
         ]
       },
-      "/Users/peterocallaghan/Projects/MakersBnB/spec/unit/user_spec.rb": {
+      "/Users/tim/Projects/MakersBnB/spec/unit/user_spec.rb": {
         "lines": [
           1,
           null,
@@ -368,7 +368,7 @@
           null
         ]
       },
-      "/Users/peterocallaghan/Projects/MakersBnB/spec/setup_database.rb": {
+      "/Users/tim/Projects/MakersBnB/spec/setup_database.rb": {
         "lines": [
           1,
           null,
@@ -379,6 +379,6 @@
         ]
       }
     },
-    "timestamp": 1645786499
+    "timestamp": 1645787000
   }
 }
