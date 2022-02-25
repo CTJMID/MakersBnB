@@ -55,9 +55,12 @@ class MakersBnB < Sinatra::Base
   end
 
   post '/spaces/book' do
+    @available_from = DateTime.parse(params['available_from']).strftime('%d/%m/%Y')
+    @available_to = DateTime.parse(params['available_to']).strftime('%d/%m/%Y')
     @title = params['title']
     @price = params['price']
     @description = params['description']
+    @id = params['id']
     @booked_dates = Booking.space_dates_not_available(params['id'])
     erb :'spaces/book'
   end
@@ -72,8 +75,10 @@ class MakersBnB < Sinatra::Base
   end
 
   post '/book' do
-    Space.book(params['available_from'], params['available_to'], params['id'])
-    redirect '/book'
+    @available_from = DateTime.parse(params['available_from']).strftime('%Y-%m-%d')
+    @available_to = DateTime.parse(params['available_to']).strftime('%Y-%m-%d')
+    Space.book(@available_from, @available_to, params['id'])
+    redirect '/confirmation'
   end
 
   post '/signup' do
