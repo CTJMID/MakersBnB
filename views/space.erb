@@ -1,8 +1,5 @@
 <%= erb :header %>
-        <h1 class="text-center">Makers B'n'B</h1>
-        <br>
-        <br>
-        <h2 class="text-center">Find the space of your dreams.</h2>
+        <h1 class="text-center">Find the space of your dreams.</h1>
         <br>
         <br>
         <% if @user_email %>
@@ -53,6 +50,7 @@
 
                     
                         <% if @show_button == true %>
+                            <% if @user_email %>
                         <form action="/spaces/book" method="post">
                             <input type="hidden" name="title" value="<%= space.title %>">
                             <input type="hidden" name="description" value="<%= space.description %>">
@@ -60,8 +58,11 @@
                            <input type="hidden" name="id" value="<%= space.id %>"> 
                            <input type="hidden" name="available_from" value="<%= @available_from %>">
                            <input type="hidden" name="available_to" value="<%= @available_to %>"> 
-                          <p><input class="btn btn-primary" type="submit" value="Book"></p>
+                          <input class="btn btn-primary" type="submit" value="Book">
                         </form>
+                            <% else %>
+                            <p>Please <a href='/sessions/new'>Log-in</a> to book.</p>
+                            <% end %>
                         <% end %>
            
 

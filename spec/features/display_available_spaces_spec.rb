@@ -8,7 +8,7 @@ feature 'Display all spaces' do
     Booking.create('2022-02-26', '2022-02-28', space_b.id)
 
     visit '/spaces'
-    expect(page).to have_selector('h1', :text => "Makers B'n'B")
+    expect(page).to have_selector('h1', :text => "Find the space of your dreams.")
     expect(page).to have_content("Space A")
     expect(page).to have_content("Space B")
 

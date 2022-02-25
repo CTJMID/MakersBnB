@@ -1,9 +1,11 @@
 # MakersBnB
 
-A clone of AirBnB. Registered users can:
+A clone of AirBnB, built with Ruby, Sinatra, HTML, CSS (Bootstrap), and a little JavaScript.
+
+Registered users can:
 - Log in and out.
 - List rooms.
-- Hire / book rooms.
+- Hire / book rooms depending on date availability.
 
 ## Databases
 - `makersbnb`
@@ -11,17 +13,24 @@ A clone of AirBnB. Registered users can:
 
 ### "Spaces" table
 
-| ID | Title (60) |
-| -- | -------- |
-| 1  | Space A  |
-| 2  | Space B  |
+| ID | Title (60) | Description | Price |
+| -- | -------- | --- | --- |
+| 1  | Space A  | Description A | 50.00 |
+| 2  | Space B  | Description B | 45.85 |
 
 ### "Users" table
 
-| ID | email (120) UNIQUE | password (120) |
+| ID | email (120) UNIQUE | password (120), hashed |
 | -- | -------- | --- |
 | 1  | test@test.com  | pwd123 |
 | 2  | tost@tost.com  | wpd231 |
+
+### "Bookings" table
+
+| ID | start_date | end_date | spaces_id
+| -- | -------- | --- | --- |
+| 1  | 2022-02-27  | 2022-02-28 | 1
+| 2  | 2022-03-01  | 2022-03-08 | 1
 
 ## To set up
 

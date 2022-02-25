@@ -1,5 +1,10 @@
 feature "Ability to book a space" do
   scenario "Once a space has been booked from the form button, it becomes unavailable" do
+    User.create(email: 'test@test.com', password: '12345') 
+    visit '/sessions/new'
+    fill_in('email', with: 'test@test.com' )   
+    fill_in('password', with: '12345')
+    click_button('Log-in')
     visit('/spaces/new')
     fill_in('title', with: 'Space A')
     fill_in('description', with: 'A nice space')

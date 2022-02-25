@@ -20,7 +20,7 @@
       <% if @user.nil? %>
       <% elsif @user == false %>
       <div class="alert alert-danger" role="alert">
-        ERROR: This email has already been registered.
+        ERROR: This email has already been registered. <a href='/sessions/new'>Log-in</a>
       </div>
       <% else %>
       <div class="alert alert-success" role="alert">
