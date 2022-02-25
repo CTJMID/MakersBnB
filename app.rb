@@ -15,7 +15,7 @@ class MakersBnB < Sinatra::Base
   enable :sessions
 
   get '/' do
-    'Hello World'
+    redirect '/spaces'
   end
 
   get '/spaces' do
@@ -102,6 +102,11 @@ class MakersBnB < Sinatra::Base
     session.clear
     flash[:notice] = 'You have logged out'
     redirect '/spaces'
+  end
+
+  get '/test' do
+    @user_email = session[:user_email] 
+    erb :'test'
   end
 
   run! if app_file == $0
